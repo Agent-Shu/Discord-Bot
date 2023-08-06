@@ -29,8 +29,10 @@ try:
 except:
     print("Date Time server not Available")
 
+intents = discord.Intents.all()
+intents.voice_states = True
 
-client = commands.Bot(command_prefix='+', activity=discord.Game(name="/help"))
+client = commands.Bot(command_prefix='+', activity=discord.Game(name="/help"), intents = intents)
 slash = SlashCommand(client,sync_commands=True)
 
 song_queue = {}
@@ -73,7 +75,8 @@ async def play_song(ctx, song, vidid, get_url=False):
 async def check_queue(ctx, song, vidid, get_url=False):
     if len(song_queue[ctx.guild.id]) > 0:
         await play_song(ctx,song_queue[ctx.guild.id][0], vidid, get_url=True)
-        song_queue[ctx.guild.id].pop(0)    
+        song_queue[ctx.guild.id].pop(0)
+           
     else:
         ctx.voice_client.stop()
         

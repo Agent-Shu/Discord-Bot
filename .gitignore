@@ -2,3 +2,4 @@ pafy
 youtube_dl
 ffmpeg
 .vscode
+*.env
